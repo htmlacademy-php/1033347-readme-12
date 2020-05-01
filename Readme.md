@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Ivan Kondzerau](https://up.htmlacademy.ru/php/12/user/1033347).
-* Наставник: `Неизвестно`.
+* Наставник: [Анна Смоленцева](https://htmlacademy.ru/profile/id1402027).
 
 ---
 
