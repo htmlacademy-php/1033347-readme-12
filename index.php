@@ -347,41 +347,41 @@ $cards = [
       </div>
       <div class="popular__posts">
         <?php foreach ($cards as $key => $val): ?>
-        <article class="popular__post post <?=$val['type'] ?>">
+        <article class="popular__post post <?=$val['type']; ?>">
           <header class="post__header">
             <h2>
-              <?=$val['heading'] ?>
+              <?=$val['heading']; ?>
             </h2>
           </header>
           <div class="post__main">
             <?php if ($val['type'] === 'post-quote'): ?>
             <blockquote>
               <p>
-                <?=$val['content'] ?>
+                <?=$val['content']; ?>
               </p>
               <cite>Неизвестный Автор</cite>
             </blockquote>
             <?php endif; ?>
             <?php if ($val['type'] === 'post-link'): ?>
             <div class="post-link__wrapper">
-              <a class="post-link__external" href="http://<?=$val['content'] ?>" title="Перейти по ссылке">
+              <a class="post-link__external" href="http://<?=$val['content']; ?>" title="Перейти по ссылке">
                 <div class="post-link__info-wrapper">
                   <div class="post-link__icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
                   </div>
                   <div class="post-link__info">
                     <h3>
-                      <?=$val['heading'] ?>
+                      <?=$val['heading']; ?>
                     </h3>
                   </div>
                 </div>
-                <span><?=$val['content'] ?></span>
+                <span><?=$val['content']; ?></span>
               </a>
             </div>
             <?php endif; ?>
             <?php if ($val['type'] === 'post-photo'): ?>
             <div class="post-photo__image-wrapper">
-              <img src="img/<?=$val['content'] ?>" alt="Фото от пользователя" width="360" height="240">
+              <img src="img/<?=$val['content']; ?>" alt="Фото от пользователя" width="360" height="240">
             </div>
             <?php endif; ?>
             <?php if ($val['type'] === 'post-video'): ?>
@@ -390,7 +390,7 @@ $cards = [
                 <?php
                 #embed_youtube_cover();
                 ?>
-                <img src="img/<?=$val['content'] ?>" alt="Превью к видео" width="360" height="188">
+                <img src="img/<?=$val['content']; ?>" alt="Превью к видео" width="360" height="188">
               </div>
               <a href="post-details.html" class="post-video__play-big button">
                 <svg class="post-video__play-big-icon" width="14" height="14">
@@ -402,7 +402,7 @@ $cards = [
             <?php endif; ?>
             <?php if ($val['type'] === 'post-text'): ?>
             <p>
-              <?=$val['content'] ?>
+              <?=$val['content']; ?>
             </p>
             <?php endif; ?>
           </div>
@@ -410,10 +410,10 @@ $cards = [
             <div class="post__author">
               <a class="post__author-link" href="#" title="Автор">
                 <div class="post__avatar-wrapper">
-                  <img class="post__author-avatar" src="img/<?=$val['avatar'] ?>" alt="Аватар пользователя">
+                  <img class="post__author-avatar" src="img/<?=$val['avatar']; ?>" alt="Аватар пользователя">
                 </div>
                 <div class="post__info">
-                  <b class="post__author-name"><?=$val['user_name'] ?></b>
+                  <b class="post__author-name"><?=$val['user_name']; ?></b>
                   <time class="post__time" datetime="">дата</time>
                 </div>
               </a>
