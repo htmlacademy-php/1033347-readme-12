@@ -2,7 +2,7 @@
 function string_trim($string, $max_string_length = 300)
 {
   if (mb_strlen($string) <= $max_string_length) {
-    return "<p>$string</p>";
+    $result = "<p>$string</p>";
   } else {
     $words = explode(' ', $string);
     $sum = 0;
@@ -17,9 +17,10 @@ function string_trim($string, $max_string_length = 300)
     $words = array_slice($words, 0, $max_element);
     $new_string = implode(' ', $words);
     $new_string .= '...';
-    return <<<HTML
+    $result = <<<HTML
       <p>$new_string</p>
       <a class="post-text__more-link" href="#">Читать далее</a>
-      HTML;
+HTML;
   }
+  return $result;
 };
