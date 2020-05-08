@@ -88,14 +88,14 @@
     <article class="popular__post post <?=$val['type']; ?>">
       <header class="post__header">
         <h2>
-          <?=$val['heading']; ?>
+          <?=htmlspecialchars($val['heading']); ?>
         </h2>
       </header>
       <div class="post__main">
         <?php if ($val['type'] === 'post-quote'): ?>
         <blockquote>
           <p>
-            <?=$val['content']; ?>
+            <?=htmlspecialchars($val['content']); ?>
           </p>
           <cite>Неизвестный Автор</cite>
         </blockquote>
@@ -109,11 +109,11 @@
               </div>
               <div class="post-link__info">
                 <h3>
-                  <?=$val['heading']; ?>
+                  <?=htmlspecialchars($val['heading']); ?>
                 </h3>
               </div>
             </div>
-            <span><?=$val['content']; ?></span>
+            <span><?=htmlspecialchars($val['content']); ?></span>
           </a>
         </div>
         <?php endif; ?>
