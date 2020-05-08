@@ -151,7 +151,7 @@
               <img class="post__author-avatar" src="img/<?=$val['avatar']; ?>" alt="Аватар пользователя">
             </div>
             <div class="post__info">
-              <b class="post__author-name"><?=$val['user_name']; ?></b>
+              <b class="post__author-name"><?=htmlspecialchars($val['user_name']); ?></b>
               <time class="post__time" datetime="">дата</time>
             </div>
           </a>
