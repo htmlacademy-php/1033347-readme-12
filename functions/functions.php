@@ -1,6 +1,7 @@
 <?php
 function string_trim($string, $max_string_length = 300)
 {
+  $string = htmlspecialchars($string);
   if (mb_strlen($string) <= $max_string_length) {
     $result = "<p>$string</p>";
   } else {
