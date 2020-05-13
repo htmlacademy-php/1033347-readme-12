@@ -152,7 +152,7 @@
             </div>
             <div class="post__info">
               <b class="post__author-name"><?=htmlspecialchars($val['user_name']); ?></b>
-              <time class="post__time" datetime="">дата</time>
+              <time class="post__time" datetime="<?=$post_time = generate_random_date($key); ?>" title="<?=$fomatted_post_time = date("d.m.Y H.i", strtotime($post_time)); ?>"><?=print(relative_date($post_time)); ?></time>
             </div>
           </a>
         </div>
