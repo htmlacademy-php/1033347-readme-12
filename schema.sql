@@ -1,0 +1,68 @@
+CREATE DATABASE readme
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+USE readme;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  email VARCHAR UNIQUE,
+  login VARCHAR UNIQUE,
+  password VARCHAR,
+  avatar CHAR
+);
+
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  heading CHAR,
+  paragraph TEXT,
+  author VARCHAR,
+  image CHAR,
+  video CHAR,
+  link CHAR,
+  count_views INT,
+  post_author FOREING KEY REFERENCES users(id),
+  content_type FOREING KEY REFERENCES content_types(id),
+  hashtag FOREING KEY REFERENCES hashtags(id)
+);
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  content TEXT,
+  author FOREING KEY REFERENCES users(id),
+  post FOREING KEY REFERENCES posts(id)
+);
+
+CREATE TABLE likes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user FOREING KEY REFERENCES users(id),
+  post FOREING KEY REFERENCES posts(id)
+);
+
+CREATE TABLE subscriptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author FOREING KEY REFERENCES users(id),
+  subscribe FOREING KEY REFERENCES users(id)
+);
+
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  content TEXT,
+  author FOREING KEY REFERENCES users(id),
+  receiver FOREING KEY REFERENCES users(id)
+);
+
+CREATE TABLE hashtags (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  hashtag CHAR
+);
+
+CREATE TABLE content_types (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR,
+  class VARCHAR
+);
