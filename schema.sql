@@ -6,54 +6,65 @@ USE readme;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  email VARCHAR UNIQUE,
-  login VARCHAR UNIQUE,
-  password VARCHAR,
+  date_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  email VARCHAR(128) UNIQUE NOT NULL,
+  login_user VARCHAR(128) UNIQUE NOT NULL,
+  password_user VARCHAR(128) NOT NULL,
   avatar CHAR
 );
 
 CREATE TABLE posts (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  heading CHAR,
-  paragraph TEXT,
-  author VARCHAR,
-  image CHAR,
-  video CHAR,
-  link CHAR,
+  date_post TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  heading CHAR  NOT NULL,
+  paragraph TEXT NOT NULL,
+  author VARCHAR(128) NOT NULL,
+  image_post CHAR,
+  video CHAR NOT NULL,
+  link TEXT NOT NULL,
   count_views INT,
-  post_author FOREING KEY REFERENCES users(id),
-  content_type FOREING KEY REFERENCES content_types(id),
-  hashtag FOREING KEY REFERENCES hashtags(id)
+  post_author_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id),
+  content_type_ID INT NOT NULL,
+  FOREING KEY REFERENCES content_types(id),
+  hashtag_ID INT NOT NULL,
+  FOREING KEY REFERENCES hashtags(id)
 );
 
 CREATE TABLE comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  content TEXT,
-  author FOREING KEY REFERENCES users(id),
-  post FOREING KEY REFERENCES posts(id)
+  date_comment TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  content TEXT NOT NULL,
+  author_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id),
+  post_ID INT NOT NULL,
+  FOREING KEY REFERENCES posts(id)
 );
 
 CREATE TABLE likes (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user FOREING KEY REFERENCES users(id),
-  post FOREING KEY REFERENCES posts(id)
+  user_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id),
+  post_ID INT NOT NULL,
+  FOREING KEY REFERENCES posts(id)
 );
 
 CREATE TABLE subscriptions (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  author FOREING KEY REFERENCES users(id),
-  subscribe FOREING KEY REFERENCES users(id)
+  author_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id),
+  subscribe_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id)
 );
 
 CREATE TABLE messages (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_message TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   content TEXT,
-  author FOREING KEY REFERENCES users(id),
-  receiver FOREING KEY REFERENCES users(id)
+  author_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id),
+  receiver_ID INT NOT NULL,
+  FOREING KEY REFERENCES users(id)
 );
 
 CREATE TABLE hashtags (
@@ -63,6 +74,6 @@ CREATE TABLE hashtags (
 
 CREATE TABLE content_types (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  type VARCHAR,
-  class VARCHAR
+  content_type VARCHAR(128),
+  class VARCHAR(128)
 );
