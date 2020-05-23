@@ -14,18 +14,18 @@ CREATE TABLE IF NOT EXISTS hashtags (
 );
 CREATE TABLE IF NOT EXISTS content_types (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  content_type VARCHAR(128),
+  name VARCHAR(128),
   class VARCHAR(128)
 );
 CREATE TABLE IF NOT EXISTS posts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   heading CHAR NOT NULL,
-  paragraph TEXT NOT NULL,
-  author VARCHAR(128) NOT NULL,
+  paragraph TEXT,
+  author VARCHAR(128),
   image_post TEXT,
-  video TEXT NOT NULL,
-  link TEXT NOT NULL,
+  video TEXT,
+  link TEXT,
   count_views INT,
   post_author_ID INT NOT NULL,
   content_type_ID INT NOT NULL,
