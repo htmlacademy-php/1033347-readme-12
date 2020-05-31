@@ -1,93 +1,142 @@
 USE readme;
 
-INSERT INTO content_types (name)
-VALUES
-  ('post-quote'),
-  ('post-text'),
-  ('post-photo'),
-  ('post-video'),
-  ('post-link');
+-- Fill content-types table
 
-INSERT INTO users (email, login_user, password_user)
+INSERT INTO content_types (title, class_name)
 VALUES
-  ('bulba@rb.by', 'lukashenko', 'gazgazgaz'),
-  ('balalaika@rf.ru', 'putin', 'whoifnotme');
+  ('Цитата', 'post-quote'),
+  ('Текст', 'post-text'),
+  ('Картинка', 'post-photo'),
+  ('Видео', 'post-video'),
+  ('Ссылка', 'post-link');
 
-INSERT INTO comments (content)
+-- Fill users table
+
+INSERT INTO users (email, login_user, password_user, avatar)
 VALUES
-  ('Ого! Восхитительно! Я в восторге!'),
-  ('Мдэ... Ну такое...');
+  (
+    'larisa111@mail.ru',
+    'Лариса',
+    'secret123',
+    'userpic-larisa-small.jpg'
+  ),
+  (
+    'vladik111@mail.ru',
+    'Владик',
+    'secret123',
+    'userpic.jpg'
+  ),
+  (
+    'viktor111@mail.ru',
+    'Виктор',
+    'secret123',
+    'userpic-mark.jpg'
+  );
 
-INSERT INTO posts (heading, paragraph, image_post, video, link)
+-- Fill posts table
+
+INSERT INTO posts (heading, paragraph, image_post, video, link, author, post_author_ID, content_type_ID)
 VALUES
   (
     'Цитата',
     'Мы в жизни любим только раз, а после ищем лишь похожих',
     null,
     null,
-    null
+    null,
+    'Автор цитаты',
+    1,
+    1
   ),
   (
     'Игра престолов',
     'Не могу дождаться начала финального сезона своего любимого сериала!',
     null,
     null,
-    null
+    null,
+    null,
+    2,
+    2
   ),
   (
     'Наконец, обработал фотки!',
     null,
     'rock-medium.jpg',
     null,
-    null
+    null,
+    null,
+    3,
+    3
   ),
   (
     'Моя мечта',
     null,
     null,
     'coast-medium.jpg',
-    null
+    null,
+    null,
+    1,
+    4
   ),
   (
     'Лучшие курсы',
     null,
     null,
     null,
-    'www.htmlacademy.ru'
+    'www.htmlacademy.ru',
+    null,
+    2,
+    5
   );
+
+-- Fill comments table
+
+INSERT INTO comments (content, author_ID, post_ID)
+VALUES
+  (
+    'Ого! Восхитительно! Я в восторге!',
+    1,
+    2
+  ),
+  (
+    'Мдэ... Ну такое...',
+    3,
+    2
+  );
+
+-- List of posts whith users names and types of content + sorting by views
 
 SELECT
   p.*,
   u.login_user,
-  t.name
+  c.class_name
 FROM posts AS p
 JOIN users AS u ON u.id = p.post_author_ID
-JOIN content_types AS t ON t.id = p.content_type_ID
+JOIN content_types AS c ON c.id = p.content_type_ID
 ORDER BY
   count_views DESC;
+
+-- List of posts for current user only
 
 SELECT
   p.*,
   u.login_user
 FROM posts AS p
-JOIN users AS u ON u.login_user = 'lukashenko'
+JOIN users AS u ON u.login_user = 'Лариса'
   AND u.id = p.post_author_ID;
 
-  -- SELECT p.*, u.login_user
-  -- FROM posts AS p
-  -- JOIN users AS u ON u.id = p.post_author_ID
-  -- WHERE u.login_user = 'lukashenko';
+-- List of comments for current post + users names
 
 SELECT
   c.*,
   u.login_user
 FROM comments AS c
 JOIN users AS u ON u.id = c.author_ID
-JOIN posts AS p ON p.id = c.post_ID
 WHERE
-  p.id = "1";
+  c.post_ID = 2;
 
-INSERT INTO likes AS l (user_ID, post_ID)
+-- Add like to post
+
+INSERT INTO likes (user_ID, post_ID)
 VALUES
   (
     (
@@ -95,18 +144,14 @@ VALUES
         u.id
       FROM users AS u
       WHERE
-        u.id = l.user_ID
+        u.login_user = 'Лариса'
     ),
-    (
-      SELECT
-        p.id
-      FROM posts AS p
-      WHERE
-        p.id = l.post_ID
-    )
+    2
   );
 
-INSERT INTO subscriptions AS s (author_ID, subscribe_ID)
+-- Subscribe to user
+
+INSERT INTO subscriptions (author_ID, subscribe_ID)
 VALUES
   (
     (
@@ -114,13 +159,13 @@ VALUES
         u.id
       FROM users AS u
       WHERE
-        u.id = s.author_ID
+        u.login_user = 'Виктор'
     ),
     (
       SELECT
         u.id
       FROM users AS u
       WHERE
-        u.id = s.subscribe_ID
+        u.login_user ='Лариса'
     )
-  )
+  );
