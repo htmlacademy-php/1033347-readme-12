@@ -80,7 +80,3 @@ function relative_date($post_date)
     }
     return $result;
 };
-
-function db_request($link, $sql) {
-    return mysqli_fetch_all(mysqli_query($link, $sql), MYSQLI_ASSOC);
-}
