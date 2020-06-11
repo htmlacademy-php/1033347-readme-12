@@ -19,7 +19,9 @@ CREATE TABLE IF NOT EXISTS hashtags (
 CREATE TABLE IF NOT EXISTS content_types (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(128),
-  class_name VARCHAR(128)
+  class_name VARCHAR(128),
+  icon_width INT,
+  icon_height INT
 );
 
 CREATE TABLE IF NOT EXISTS posts (

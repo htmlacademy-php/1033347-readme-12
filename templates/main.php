@@ -40,51 +40,21 @@
             <span>Все</span>
           </a>
         </li>
+        <?php foreach ($types as $key => $val): ?>
         <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button--photo button" href="#">
-            <span class="visually-hidden">Фото</span>
-            <svg class="filters__icon" width="22" height="18">
-              <use xlink:href="#icon-filter-photo"></use>
+          <a class="filters__button filters__button-<?=mb_stristr($val['class_name'], '-'); ?> button" href="#">
+            <span class="visually-hidden"><?=$val['title']; ?></span>
+            <svg class="filters__icon" width="<?=$val['icon_width']; ?>" height="<?=$val['icon_height']; ?>">
+              <use xlink:href="#icon-filter<?=mb_stristr($val['class_name'], '-'); ?>"></use>
             </svg>
           </a>
         </li>
-        <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button--video button" href="#">
-            <span class="visually-hidden">Видео</span>
-            <svg class="filters__icon" width="24" height="16">
-              <use xlink:href="#icon-filter-video"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button--text button" href="#">
-            <span class="visually-hidden">Текст</span>
-            <svg class="filters__icon" width="20" height="21">
-              <use xlink:href="#icon-filter-text"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button--quote button" href="#">
-            <span class="visually-hidden">Цитата</span>
-            <svg class="filters__icon" width="21" height="20">
-              <use xlink:href="#icon-filter-quote"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button--link button" href="#">
-            <span class="visually-hidden">Ссылка</span>
-            <svg class="filters__icon" width="21" height="18">
-              <use xlink:href="#icon-filter-link"></use>
-            </svg>
-          </a>
-        </li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </div>
   <div class="popular__posts">
-    <?php foreach ($cards as $key => $val): ?>
+    <?php foreach ($posts as $key => $val): ?>
     <article class="popular__post post <?=$val['type']; ?>">
       <header class="post__header">
         <h2>
@@ -95,14 +65,14 @@
         <?php if ($val['type'] === 'post-quote'): ?>
         <blockquote>
           <p>
-            <?=htmlspecialchars($val['content']); ?>
+            <?=htmlspecialchars($val['paragraph']); ?>
           </p>
           <cite>Неизвестный Автор</cite>
         </blockquote>
         <?php endif; ?>
         <?php if ($val['type'] === 'post-link'): ?>
         <div class="post-link__wrapper">
-          <a class="post-link__external" href="http://<?=$val['content']; ?>" title="Перейти по ссылке">
+          <a class="post-link__external" href="http://<?=$val['link']; ?>" title="Перейти по ссылке">
             <div class="post-link__info-wrapper">
               <div class="post-link__icon-wrapper">
                 <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
@@ -113,13 +83,13 @@
                 </h3>
               </div>
             </div>
-            <span><?=htmlspecialchars($val['content']); ?></span>
+            <span><?=htmlspecialchars($val['link']); ?></span>
           </a>
         </div>
         <?php endif; ?>
         <?php if ($val['type'] === 'post-photo'): ?>
         <div class="post-photo__image-wrapper">
-          <img src="img/<?=$val['content']; ?>" alt="Фото от пользователя" width="360" height="240">
+          <img src="img/<?=$val['image_post']; ?>" alt="Фото от пользователя" width="360" height="240">
         </div>
         <?php endif; ?>
         <?php if ($val['type'] === 'post-video'): ?>
@@ -128,7 +98,7 @@
             <?php
                 #embed_youtube_cover();
                 ?>
-            <img src="img/<?=$val['content']; ?>" alt="Превью к видео" width="360" height="188">
+            <img src="img/<?=$val['video']; ?>" alt="Превью к видео" width="360" height="188">
           </div>
           <a href="post-details.html" class="post-video__play-big button">
             <svg class="post-video__play-big-icon" width="14" height="14">
@@ -140,7 +110,7 @@
         <?php endif; ?>
         <?php
             if ($val['type'] === 'post-text'){
-              echo string_trim($val['content']);
+              echo string_trim($val['paragraph']);
             }
             ?>
       </div>

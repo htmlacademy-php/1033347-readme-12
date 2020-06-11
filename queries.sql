@@ -2,13 +2,13 @@ USE readme;
 
 -- Fill content-types table
 
-INSERT INTO content_types (title, class_name)
+INSERT INTO content_types (title, class_name, icon_width, icon_height)
 VALUES
-  ('Цитата', 'post-quote'),
-  ('Текст', 'post-text'),
-  ('Картинка', 'post-photo'),
-  ('Видео', 'post-video'),
-  ('Ссылка', 'post-link');
+  ('Цитата', 'post-quote', 21, 20),
+  ('Текст', 'post-text', 20, 21),
+  ('Картинка', 'post-photo', 22, 18),
+  ('Видео', 'post-video', 24, 16),
+  ('Ссылка', 'post-link', 21, 18);
 
 -- Fill users table
 

@@ -1,56 +1,43 @@
 <?php
-require_once('helpers.php');
-require_once('functions/functions.php');
-
-date_default_timezone_set("Europe/Moscow");
+require_once('config/settings.php');
 
 $is_auth = rand(0, 1);
 
-$user_name = 'ivan'; // укажите здесь ваше имя
+$user_name = 'ivan';
 
 $title = 'readme: популярное';
 
-$cards = [
-  [
-    'heading' => 'Цитата',
-    'type' => 'post-quote',
-    'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
-    'user_name' => 'Лариса',
-    'avatar' =>  'userpic-larisa-small.jpg'
-  ],
-  [
-    'heading' => 'Игра престолов',
-    'type' => 'post-text',
-    'content' => 'Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала!',
-    'user_name' => 'Владик',
-    'avatar' => 'userpic.jpg'
-  ],
-  [
-    'heading' => 'Наконец, обработал фотки!',
-    'type' => 'post-photo',
-    'content' => 'rock-medium.jpg',
-    'user_name' => 'Виктор',
-    'avatar' => 'userpic-mark.jpg'
-  ],
-  [
-    'heading' => 'Моя мечта',
-    'type' => 'post-video',
-    'content' => 'coast-medium.jpg',
-    'user_name' => 'Лариса',
-    'avatar' => 'userpic-larisa-small.jpg'
-  ],
-  [
-    'heading' => 'Лучшие курсы',
-    'type' => 'post-link',
-    'content' => 'www.htmlacademy.ru',
-    'user_name' => 'Владик',
-    'avatar' => 'userpic.jpg'
-  ]
-];
+if (!$con) {
+    $error = mysqli_connect_error();
+    $content = include_template('error.php', [
+        'error' => $error
+    ]);
+} else {
+    // Request Content Types from DB
+    $sql_types = 'SELECT
+        *
+        FROM content_types';
 
-$content = include_template('main.php', [
-    'cards' => $cards
-]);
+    $types = db_request($con, $sql_types);
+
+    //Request Posts from DB
+    $sql_posts = 'SELECT
+        p.*,
+        u.login_user AS user_name,
+        u.avatar,
+        c.class_name AS type
+        FROM posts AS p
+        JOIN users AS u ON u.id = p.post_author_ID
+        JOIN content_types AS c ON c.id = p.content_type_ID
+        ORDER BY count_views DESC';
+
+    $posts = db_request($con, $sql_posts);
+
+    $content = include_template('main.php', [
+        'types' => $types,
+        'posts' => $posts
+    ]);
+};
 
 $layout = include_template('layout.php', [
     'title' => $title,
@@ -59,4 +46,4 @@ $layout = include_template('layout.php', [
     'content' => $content
 ]);
 
-print($layout);
+echo ($layout);
