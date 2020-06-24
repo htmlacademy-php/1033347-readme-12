@@ -75,7 +75,7 @@
         var e = t.querySelectorAll(".sorting__link"),
           r = t.querySelector(".sorting__link--active"),
           i = function (t) {
-            t.preventDefault(),
+            // t.preventDefault(),
               t.currentTarget === r
                 ? r.classList.toggle("sorting__link--reverse")
                 : (r.classList.remove("sorting__link--active"),
@@ -95,7 +95,7 @@
       for (
         var r = t.querySelector(".filters__button--active"),
           i = function (t) {
-            t.preventDefault(),
+            // t.preventDefault(),
               t.currentTarget !== r &&
                 (r.classList.remove("filters__button--active"),
                 t.currentTarget.classList.add("filters__button--active"),

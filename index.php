@@ -25,7 +25,7 @@ if (!$con) {
     //Request Posts from DB
 
     if (isset($_GET['id'])) {
-        $post_id = $_GET['id'];
+        $post_id = intval($_GET['id']);
         $sql_posts = "SELECT
             p.*,
             u.login_user AS user_name,
@@ -36,6 +36,9 @@ if (!$con) {
             JOIN content_types AS c ON c.id = p.content_type_ID
             WHERE c.id = $post_id
             ORDER BY count_views DESC";
+        $content = include_template('main.php', [
+            'post_id' => $post_id
+        ]);
     } else {
         $sql_posts = 'SELECT
         p.*,
