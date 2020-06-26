@@ -24,23 +24,15 @@ if (!$con) {
 
     //Request Posts from DB
 
+    $category_id = 0;
+    $sql_where = '';
+
     if (isset($_GET['id'])) {
-        $post_id = intval($_GET['id']);
-        $sql_posts = "SELECT
-            p.*,
-            u.login_user AS user_name,
-            u.avatar,
-            c.class_name AS type
-            FROM posts AS p
-            JOIN users AS u ON u.id = p.post_author_ID
-            JOIN content_types AS c ON c.id = p.content_type_ID
-            WHERE c.id = $post_id
-            ORDER BY count_views DESC";
-        $content = include_template('main.php', [
-            'post_id' => $post_id
-        ]);
-    } else {
-        $sql_posts = 'SELECT
+        $category_id = intval($_GET['id']);
+        $sql_where = 'WHERE c.id = $category_id';
+    }
+
+    $sql_posts = "SELECT
         p.*,
         u.login_user AS user_name,
         u.avatar,
@@ -48,12 +40,13 @@ if (!$con) {
         FROM posts AS p
         JOIN users AS u ON u.id = p.post_author_ID
         JOIN content_types AS c ON c.id = p.content_type_ID
-        ORDER BY count_views DESC';
-    }
+        ".$sql_where."
+        ORDER BY count_views DESC";
 
     $posts = db_request($con, $sql_posts);
 
     $content = include_template('main.php', [
+        'category_id' => $category_id,
         'types' => $types,
         'posts' => $posts
     ]);

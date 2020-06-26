@@ -42,7 +42,7 @@
         </li>
         <?php foreach ($types as $key => $val): ?>
         <li class="popular__filters-item filters__item">
-          <a class="filters__button filters__button-<?=mb_stristr($val['class_name'], '-'); ?> <?php if ($post_id === $val['id']) echo ('filters__button--active'); ?> button" href="index.php?id=<?=$val['id']; ?>">
+          <a class="filters__button filters__button-<?=mb_stristr($val['class_name'], '-'); ?> <?php if ($category_id === $val['id']) echo ('filters__button--active'); ?> button" href="index.php?id=<?=$val['id']; ?>">
             <span class="visually-hidden"><?=$val['title']; ?></span>
             <svg class="filters__icon" width="<?=$val['icon_width']; ?>" height="<?=$val['icon_height']; ?>">
               <use xlink:href="#icon-filter<?=mb_stristr($val['class_name'], '-'); ?>"></use>
