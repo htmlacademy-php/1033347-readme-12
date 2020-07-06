@@ -29,7 +29,7 @@ if (!$con) {
 
     if (isset($_GET['id'])) {
         $category_id = intval($_GET['id']);
-        $sql_where = 'WHERE c.id = $category_id';
+        $sql_where = "WHERE c.id = $category_id";
     }
 
     $sql_posts = "SELECT
