@@ -10,9 +10,9 @@
                             <div class="post__main">
                                 <blockquote>
                                     <p>
-                                        <?= $post['paragraph']; ?>
+                                        <?= htmlspecialchars($post['paragraph']); ?>
                                     </p>
-                                    <cite><?= $post['author']; ?></cite>
+                                    <cite><?= htmlspecialchars($post['author']); ?></cite>
                                 </blockquote>
                             </div>
                         </div>
@@ -21,26 +21,29 @@
                         <div class="post-details__image-wrapper post-text">
                             <div class="post__main">
                                 <p>
-                                    <?= $post['paragraph']; ?>
+                                    <?= htmlspecialchars($post['paragraph']); ?>
                                 </p>
                             </div>
                         </div>
                     <?php endif; ?>
                     <?php if ($post['class_name'] === 'post-photo') : ?>
                         <div class="post-details__image-wrapper post-photo__image-wrapper">
-                            <img src="img/<?= $post['image_post']; ?>" alt="Фото от пользователя" width="760" height="507">
+                            <div class="post__main">
+                                <img src="img/<?= htmlspecialchars($post['image_post']); ?>" alt="Фото от пользователя" width="760" height="507">
+                            </div>
                         </div>
                     <?php endif; ?>
                     <?php if ($post['class_name'] === 'post-link') : ?>
                         <div class="post__main">
                             <div class="post-link__wrapper">
-                                <a class="post-link__external" href="http://<?= $post['link']; ?>" title="Перейти по ссылке">
+                                <a class="post-link__external" href="http://<?= htmlspecialchars($post['link']); ?>" title="Перейти по ссылке">
                                     <div class="post-link__info-wrapper">
                                         <div class="post-link__icon-wrapper">
-                                            <img src="https://www.google.com/s2/favicons?domain=<?= $post['link']; ?>" alt="Иконка">
+                                            <img src="https://www.google.com/s2/favicons?domain=<?= htmlspecialchars($post['link']); ?>" alt="Иконка">
                                         </div>
                                         <div class="post-link__info">
-                                            <h3><?= $post['heading']; ?></h3>
+                                            <h3><?= htmlspecialchars($post['heading']); ?></h3>
+                                            <span><?= htmlspecialchars($post['link']); ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -48,8 +51,29 @@
                         </div>
                     <?php endif; ?>
                     <?php if ($post['class_name'] === 'post-video') : ?>
-                        <div class="post-details__image-wrapper post-photo__image-wrapper">
-                            <!-- <?= embed_youtube_video($youtube_url); ?> -->
+                        <div class="post__main">
+                            <div class="post-video__block">
+                                <div class="post-video__preview">
+                                    <img src="img/<?= htmlspecialchars($post['video']); ?>" alt="Превью к видео" width="760" height="396">
+                                </div>
+                                <div class="post-video__control">
+                                    <button class="post-video__play post-video__play--paused button button--video" type="button"><span class="visually-hidden">Запустить видео</span></button>
+                                    <div class="post-video__scale-wrapper">
+                                        <div class="post-video__scale">
+                                            <div class="post-video__bar">
+                                                <div class="post-video__toggle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="post-video__fullscreen post-video__fullscreen--inactive button button--video" type="button"><span class="visually-hidden">Полноэкранный режим</span></button>
+                                </div>
+                                <button class="post-video__play-big button" type="button">
+                                    <svg class="post-video__play-big-icon" width="27" height="28">
+                                        <use xlink:href="#icon-video-play-big"></use>
+                                    </svg>
+                                    <span class="visually-hidden">Запустить проигрыватель</span>
+                                </button>
+                            </div>
                         </div>
                     <?php endif; ?>
                     <div class="post__indicators">
@@ -147,12 +171,12 @@
                     <div class="post-details__user-info user__info">
                         <div class="post-details__avatar user__avatar">
                             <a class="post-details__avatar-link user__avatar-link" href="#">
-                                <img class="post-details__picture user__picture" src="img/userpic-elvira.jpg" alt="Аватар пользователя">
+                                <img class="post-details__picture user__picture" src="img/<?= htmlspecialchars($post['avatar']); ?>" alt="Аватар пользователя">
                             </a>
                         </div>
                         <div class="post-details__name-wrapper user__name-wrapper">
                             <a class="post-details__name user__name" href="#">
-                                <span>Эльвира Хайпулинова</span>
+                                <span><?= htmlspecialchars($post['login_user']); ?></span>
                             </a>
                             <time class="post-details__time user__time" datetime="2014-03-20">5 лет на сайте</time>
                         </div>
