@@ -16,30 +16,35 @@ if (!$con) {
 
 // Check existence of $_GET['id]
 } else  if (!isset($_GET['id'])) {
-    $content = http_response_code(404);
+    http_response_code(404);
 } else {
     $post_ID = intval($_GET['id']);
     $sql_post = "SELECT
         *
         FROM posts AS p
+        JOIN content_types AS c ON c.id = p.content_type_ID
+        JOIN users AS u ON u.id = p.post_author_ID
         WHERE p.id = $post_ID";
-    $post = db_request($con, $sql_post);
+    $post = mysqli_query($con, $sql_post);
 
 // Check existence field in post
     if (mysqli_num_rows($post) === 0) {
-        $content = http_response_code(404);
+        http_response_code(404);
     } else {
+        $post = db_request($con, $sql_post);
         $content = include_template('post_template.php', [
-            'post' => $post
+            'post' => $post[0]
         ]);
     };
 }
 
-$layout = include_template('layout.php', [
-    'title' => $title,
-    'is_auth' => $is_auth,
-    'user_name' => $user_name,
-    'content' => $content
-]);
+if ($content) {
+    $layout = include_template('layout.php', [
+        'title' => $title,
+        'is_auth' => $is_auth,
+        'user_name' => $user_name,
+        'content' => $content
+    ]);
+}
 
 echo ($layout);
