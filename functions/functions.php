@@ -26,8 +26,12 @@ HTML;
     return $result;
 };
 
-function relative_date($post_date)
+function relative_date($post_date, $user = true)
 {
+    $last = ' назад';
+    if ($user) {
+        $last = ' на сайте';
+    }
     $past = strtotime($post_date);
     $present = time();
     $diff = $present - $past;
@@ -40,7 +44,7 @@ function relative_date($post_date)
                 'минуты',
                 'минут'
             ) .
-            ' назад';
+            $last;
     } elseif (floor($diff / 3600) < 24) {
         $result = floor($diff / 3600) . ' ' .
             get_noun_plural_form(
@@ -49,7 +53,7 @@ function relative_date($post_date)
                 'часа',
                 'часов'
             ) .
-            ' назад';
+            $last;
     } elseif (floor($diff / 86400) < 7) {
         $result = floor($diff / 86400) . ' ' .
             get_noun_plural_form(
@@ -58,7 +62,7 @@ function relative_date($post_date)
                 'дня',
                 'дней'
             ) .
-            ' назад';
+            $last;
     } elseif (floor($diff / 604800) < 5) {
         $result = floor($diff / 604800) . ' ' .
             get_noun_plural_form(
@@ -67,8 +71,8 @@ function relative_date($post_date)
                 'недели',
                 'недель'
             ) .
-            ' назад';
-    } else {
+            $last;
+    } elseif (floor($diff / 2419200) < 13) {
         $result = floor($diff / 2419200) . ' ' .
             get_noun_plural_form(
                 floor($diff / 2419200),
@@ -76,7 +80,16 @@ function relative_date($post_date)
                 'месяца',
                 'месяцев'
             ) .
-            ' назад';
+            $last;
+    } else {
+        $result = floor($diff / 29030400) . ' ' .
+            get_noun_plural_form(
+                floor($diff / 29030400),
+                'год',
+                'года',
+                'лет'
+            ) .
+            $last;
     }
     return $result;
 };

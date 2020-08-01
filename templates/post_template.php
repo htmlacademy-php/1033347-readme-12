@@ -85,25 +85,25 @@
                                 <svg class="post__indicator-icon post__indicator-icon--like-active" width="20" height="17">
                                     <use xlink:href="#icon-heart-active"></use>
                                 </svg>
-                                <span>250</span>
+                                <span><?= $post['count_post_likes']; ?></span>
                                 <span class="visually-hidden">количество лайков</span>
                             </a>
                             <a class="post__indicator post__indicator--comments button" href="#" title="Комментарии">
                                 <svg class="post__indicator-icon" width="19" height="17">
                                     <use xlink:href="#icon-comment"></use>
                                 </svg>
-                                <span>25</span>
+                                <span><?= $post['count_post_comments']; ?></span>
                                 <span class="visually-hidden">количество комментариев</span>
                             </a>
                             <a class="post__indicator post__indicator--repost button" href="#" title="Репост">
                                 <svg class="post__indicator-icon" width="19" height="17">
                                     <use xlink:href="#icon-repost"></use>
                                 </svg>
-                                <span>5</span>
+                                <span><?= $post['count_post_reposts']; ?></span>
                                 <span class="visually-hidden">количество репостов</span>
                             </a>
                         </div>
-                        <span class="post__view">500 просмотров</span>
+                        <span class="post__view"><?= ($post['count_views'] === NULL) ? 0 : $post['count_views']; ?> просмотров</span>
                     </div>
                     <div class="comments">
                         <form class="comments__form form" action="#" method="post">
@@ -178,16 +178,16 @@
                             <a class="post-details__name user__name" href="#">
                                 <span><?= htmlspecialchars($post['login_user']); ?></span>
                             </a>
-                            <time class="post-details__time user__time" datetime="2014-03-20">5 лет на сайте</time>
+                            <time class="post-details__time user__time" datetime="<?= $post['date_registration']; ?>"><?= relative_date($post['date_registration'], true); ?></time>
                         </div>
                     </div>
                     <div class="post-details__rating user__rating">
                         <p class="post-details__rating-item user__rating-item user__rating-item--subscribers">
-                            <span class="post-details__rating-amount user__rating-amount">1856</span>
+                            <span class="post-details__rating-amount user__rating-amount"><?= $post['count_author_subscriptions']; ?></span>
                             <span class="post-details__rating-text user__rating-text">подписчиков</span>
                         </p>
                         <p class="post-details__rating-item user__rating-item user__rating-item--publications">
-                            <span class="post-details__rating-amount user__rating-amount">556</span>
+                            <span class="post-details__rating-amount user__rating-amount"><?= $post['count_author_posts']; ?></span>
                             <span class="post-details__rating-text user__rating-text">публикаций</span>
                         </p>
                     </div>
