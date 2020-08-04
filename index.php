@@ -13,7 +13,9 @@ if (!$con) {
         'error' => $error
     ]);
 } else {
+
     // Request Content Types from DB
+
     $sql_types = 'SELECT
         *
         FROM content_types';
@@ -21,7 +23,16 @@ if (!$con) {
     $types = db_request($con, $sql_types);
 
     //Request Posts from DB
-    $sql_posts = 'SELECT
+
+    $category_id = 0;
+    $sql_where = '';
+
+    if (isset($_GET['id'])) {
+        $category_id = intval($_GET['id']);
+        $sql_where = "WHERE c.id = $category_id";
+    }
+
+    $sql_posts = "SELECT
         p.*,
         u.login_user AS user_name,
         u.avatar,
@@ -29,11 +40,13 @@ if (!$con) {
         FROM posts AS p
         JOIN users AS u ON u.id = p.post_author_ID
         JOIN content_types AS c ON c.id = p.content_type_ID
-        ORDER BY count_views DESC';
+        ".$sql_where."
+        ORDER BY count_views DESC";
 
     $posts = db_request($con, $sql_posts);
 
     $content = include_template('main.php', [
+        'category_id' => $category_id,
         'types' => $types,
         'posts' => $posts
     ]);

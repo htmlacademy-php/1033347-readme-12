@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS posts (
   video TEXT,
   link TEXT,
   count_views INT,
+  is_repost BIT,
+  origin_author_ID INT,
   post_author_ID INT NOT NULL,
   content_type_ID INT NOT NULL,
   FOREIGN KEY (post_author_ID) REFERENCES users(id),
