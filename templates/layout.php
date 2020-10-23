@@ -216,9 +216,7 @@
     </div>
   </header>
 
-  <section class="page__main page__main--popular">
-    <?php print($content); ?>
-  </section>
+  <?php print($content); ?>
 
   <footer class="footer">
     <div class="footer__wrapper">
