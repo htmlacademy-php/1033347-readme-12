@@ -4,11 +4,11 @@ USE readme;
 
 INSERT INTO content_types (title, class_name, icon_width, icon_height)
 VALUES
-  ('Цитата', 'post-quote', 21, 20),
-  ('Текст', 'post-text', 20, 21),
-  ('Картинка', 'post-photo', 22, 18),
-  ('Видео', 'post-video', 24, 16),
-  ('Ссылка', 'post-link', 21, 18);
+  ('Цитата', 'quote', 21, 20),
+  ('Текст', 'text', 20, 21),
+  ('Картинка', 'photo', 22, 18),
+  ('Видео', 'video', 24, 16),
+  ('Ссылка', 'link', 21, 18);
 
 -- Fill users table
 
