@@ -43,10 +43,10 @@
           </li>
           <?php foreach ($types as $key => $val) : ?>
             <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button-<?= $val['class_name']; ?> <?= $category_id === intval($val['id']) ? 'filters__button--active' : ''; ?> button" href="index.php?id=<?= $val['id']; ?>">
+              <a class="filters__button filters__button--<?= $val['class_name']; ?> <?= $category_id === intval($val['id']) ? 'filters__button--active' : ''; ?> button" href="index.php?id=<?= $val['id']; ?>">
                 <span class="visually-hidden"><?= $val['title']; ?></span>
                 <svg class="filters__icon" width="<?= $val['icon_width']; ?>" height="<?= $val['icon_height']; ?>">
-                  <use xlink:href="#icon-filter<?= $val['class_name']; ?>"></use>
+                  <use xlink:href="#icon-filter-<?= $val['class_name']; ?>"></use>
                 </svg>
               </a>
             </li>
@@ -63,7 +63,7 @@
             </h2>
           </header>
           <div class="post__main">
-            <?php if ($val['type'] === 'post-quote') : ?>
+            <?php if ($val['type'] === 'quote') : ?>
               <blockquote>
                 <p>
                   <?= htmlspecialchars($val['paragraph']); ?>
@@ -71,7 +71,7 @@
                 <cite>Неизвестный Автор</cite>
               </blockquote>
             <?php endif; ?>
-            <?php if ($val['type'] === 'post-link') : ?>
+            <?php if ($val['type'] === 'link') : ?>
               <div class="post-link__wrapper">
                 <a class="post-link__external" href="http://<?= $val['link']; ?>" title="Перейти по ссылке">
                   <div class="post-link__info-wrapper">
@@ -88,12 +88,12 @@
                 </a>
               </div>
             <?php endif; ?>
-            <?php if ($val['type'] === 'post-photo') : ?>
+            <?php if ($val['type'] === 'photo') : ?>
               <div class="post-photo__image-wrapper">
                 <img src="img/<?= $val['image_post']; ?>" alt="Фото от пользователя" width="360" height="240">
               </div>
             <?php endif; ?>
-            <?php if ($val['type'] === 'post-video') : ?>
+            <?php if ($val['type'] === 'video') : ?>
               <div class="post-video__block">
                 <div class="post-video__preview">
                   <?php
@@ -109,7 +109,7 @@
                 </a>
               </div>
             <?php endif; ?>
-            <?php if ($val['type'] === 'post-text') {
+            <?php if ($val['type'] === 'text') {
               echo string_trim($val['paragraph']);
             }
             ?>
