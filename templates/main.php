@@ -56,7 +56,7 @@
     </div>
     <div class="popular__posts">
       <?php foreach ($posts as $key => $val) : ?>
-        <article class="popular__post post <?= $val['type']; ?>">
+        <article class="popular__post post post-<?= $val['type']; ?>">
           <header class="post__header">
             <h2>
               <a href="post.php?id=<?= intval($val['id']) ?>"><?= htmlspecialchars($val['heading']); ?></a>
