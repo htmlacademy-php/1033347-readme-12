@@ -9,7 +9,13 @@
                     <ul class="adding-post__tabs-list filters__list tabs__list">
                         <?php foreach ($types as $key => $val) : ?>
                         <li class="adding-post__tabs-item filters__item">
-                            <a class="adding-post__tabs-link filters__button filters__button--<?= $val['class_name']; ?> filters__button--active tabs__item tabs__item--active button" href="#">
+                            <a class="adding-post__tabs-link
+                              filters__button
+                              filters__button--<?= $val['class_name']; ?>
+                              <?= $val['class_name'] === 'quote' ? 'filters__button--active tabs__item--active' : ' '; ?>
+                              tabs__item
+                              button"
+                              href="#">
                                 <svg class="filters__icon" width="<?= $val['icon_width']; ?>" height="<?= $val['icon_height']; ?>">
                                     <use xlink:href="#icon-filter-<?= $val['class_name']; ?>"></use>
                                 </svg>
