@@ -11,7 +11,7 @@
             <li class="adding-post__tabs-item filters__item">
               <a class="adding-post__tabs-link
                               filters__button
-                              filters__button--<?= $val['class_name']; ?>
+                              filters__button--<?= $val['class_name'] ?>
                               <?= $val['class_name'] === 'quote' ? 'filters__button--active tabs__item--active' : ' '; ?>
                               tabs__item
                               button" href="#">
@@ -29,15 +29,16 @@
           <section
             class="adding-post__<?= $val['class_name']; ?> tabs__content <?= $val['class_name'] === 'quote' ? 'tabs__content--active' : ''; ?>">
             <h2 class="visually-hidden">Форма добавления <?= $val['title']; ?></h2>
-            <form class="adding-post__form form" action="/add.php" method="post" enctype="multipart/form-data">
+            <form class="adding-post__form form" action="/add.php" method="POST" <?= $val['class_name'] === 'photo' ? 'enctype="multipart/form-data"' : ''; ?>>
+                <input type="text" class="visually-hidden" name="current-tab" value="<?= $val['class_name']; ?>">
               <div class="form__text-inputs-wrapper">
                 <div class="form__text-inputs">
                   <div class="adding-post__input-wrapper form__input-wrapper">
-                    <label class="adding-post__label form__label" for="<?= val['class_name']; ?>-heading">Заголовок
+                    <label class="adding-post__label form__label" for="<?= $val['class_name']; ?>-heading">Заголовок
                       <span class="form__input-required">*</span></label>
                     <div class="form__input-section">
-                      <input class="adding-post__input form__input" id="<?= val['class_name']; ?>-heading" type="text"
-                        name="<?= val['class_name']; ?>-heading" placeholder="Введите заголовок">
+                      <input class="adding-post__input form__input" id="<?= $val['class_name']; ?>-heading" type="text"
+                        name="post-heading" placeholder="Введите заголовок" required>
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об ошибке</span></button>
                       <div class="form__error-text">
@@ -50,7 +51,7 @@
                   <div class="adding-post__input-wrapper form__input-wrapper">
                     <label class="adding-post__label form__label" for="photo-url">Ссылка из интернета</label>
                     <div class="form__input-section">
-                      <input class="adding-post__input form__input" id="photo-url" type="text" name="photo-heading"
+                      <input class="adding-post__input form__input" id="photo-url" type="text" name="photo-url"
                         placeholder="Введите ссылку">
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об ошибке</span></button>
@@ -66,7 +67,7 @@
                     <label class="adding-post__label form__label" for="video-url">Ссылка youtube <span
                         class="form__input-required">*</span></label>
                     <div class="form__input-section">
-                      <input class="adding-post__input form__input" id="video-url" type="text" name="video-heading"
+                      <input class="adding-post__input form__input" id="video-url" type="text" name="video-link"
                         placeholder="Введите ссылку">
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об
@@ -83,7 +84,7 @@
                     <label class="adding-post__label form__label" for="post-text">Текст поста <span
                         class="form__input-required">*</span></label>
                     <div class="form__input-section">
-                      <textarea class="adding-post__textarea form__textarea form__input" id="post-text"
+                      <textarea class="adding-post__textarea form__textarea form__input" id="post-text" name="post-text"
                         placeholder="Введите текст публикации"></textarea>
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об
@@ -97,11 +98,11 @@
                   <?php endif; ?>
                   <?php if($val['class_name'] === 'quote'): ?>
                   <div class="adding-post__input-wrapper form__textarea-wrapper">
-                    <label class="adding-post__label form__label" for="cite-text">Текст цитаты <span
+                    <label class="adding-post__label form__label" for="quote-text">Текст цитаты <span
                         class="form__input-required">*</span></label>
                     <div class="form__input-section">
                       <textarea class="adding-post__textarea adding-post__textarea--quote form__textarea form__input"
-                        id="cite-text" placeholder="Текст цитаты"></textarea>
+                        id="quote-text" name="quote-text" placeholder="Текст цитаты"></textarea>
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об
                           ошибке</span></button>
@@ -143,9 +144,9 @@
                   </div>
                   <?php endif; ?>
                   <div class="adding-post__input-wrapper form__input-wrapper">
-                    <label class="adding-post__label form__label" for="photo-tags">Теги</label>
+                    <label class="adding-post__label form__label" for="<?= $val['class_name']; ?>-tags">Теги</label>
                     <div class="form__input-section">
-                      <input class="adding-post__input form__input" id="photo-tags" type="text" name="photo-heading"
+                      <input class="adding-post__input form__input" id="<?= $val['class_name']; ?>-tags" type="text" name="post-tags"
                         placeholder="Введите теги">
                       <button class="form__error-button button" type="button">!<span class="visually-hidden">Информация
                           об ошибке</span></button>
@@ -171,22 +172,13 @@
                 <div class="adding-post__input-file-wrapper form__input-file-wrapper">
                   <div class="adding-post__file-zone adding-post__file-zone--photo form__file-zone dropzone">
                     <input class="adding-post__input-file form__input-file" id="userpic-file-photo" type="file"
-                      name="userpic-file-photo" title=" ">
+                      name="userpic-file-photo">
                     <div class="form__file-zone-text">
                       <span>Перетащите фото сюда</span>
                     </div>
                   </div>
-                  <button
-                    class="adding-post__input-file-button form__input-file-button form__input-file-button--photo button"
-                    type="button">
-                    <span>Выбрать фото</span>
-                    <svg class="adding-post__attach-icon form__attach-icon" width="10" height="20">
-                      <use xlink:href="#icon-attach"></use>
-                    </svg>
-                  </button>
                 </div>
                 <div class="adding-post__file adding-post__file--photo form__file dropzone-previews">
-
                 </div>
               </div>
               <?php endif; ?>
