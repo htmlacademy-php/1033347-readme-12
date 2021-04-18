@@ -4,6 +4,14 @@ $is_auth = rand(0, 1);
 $user_name = 'ivan';
 $title = 'readme: популярное';
 
+//Return current tab
+
+if (isset($_POST['current-tab'])) {
+    $tab_name = $_POST['current-tab'];
+} else {
+    $tab_name = "quote";
+}
+
 // Check DB connection
 
 if (!$con) {
@@ -15,21 +23,10 @@ if (!$con) {
     $sql_types = 'SELECT * FROM content_types';
     $types = db_request($con, $sql_types);
     $content = include_template('adding-post.php', [
-      'types' => $types,
+        'types' => $types,
+        'tab_name' => $tab_name,
     ]);
 };
-
-//Return current tab
-
-if (isset($_POST['current-tab'])) {
-    $tab_name = $_POST['current-tab'];
-} else {
-    $tab_name = "quote";
-}
-
-$content = include_template('adding-post.php', [
-    'tab_name' => $tab_name,
-]);
 
 // Check FORM
 

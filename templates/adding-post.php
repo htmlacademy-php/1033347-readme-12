@@ -11,7 +11,7 @@
             <li class="adding-post__tabs-item filters__item">
               <a class="adding-post__tabs-link
                               filters__button
-                              filters__button--<?= $val['class_name'] ?>
+                              filters__button--<?= $val['class_name']; ?>
                               <?= $val['class_name'] === $tab_name ? 'filters__button--active tabs__item--active' : ' '; ?>
                               tabs__item
                               button" href="#">
