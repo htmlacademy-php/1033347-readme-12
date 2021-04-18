@@ -5,7 +5,7 @@
             <h2 class="visually-hidden">Публикация</h2>
             <div class="post-details__wrapper post-photo">
                 <div class="post-details__main-block post post--details">
-                    <?php if ($post['class_name'] === 'post-quote') : ?>
+                    <?php if ($post['class_name'] === 'quote') : ?>
                         <div class="post-details__image-wrapper post-quote">
                             <div class="post__main">
                                 <blockquote>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php if ($post['class_name'] === 'post-text') : ?>
+                    <?php if ($post['class_name'] === 'text') : ?>
                         <div class="post-details__image-wrapper post-text">
                             <div class="post__main">
                                 <p>
@@ -26,14 +26,14 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php if ($post['class_name'] === 'post-photo') : ?>
+                    <?php if ($post['class_name'] === 'photo') : ?>
                         <div class="post-details__image-wrapper post-photo__image-wrapper">
                             <div class="post__main">
                                 <img src="img/<?= htmlspecialchars($post['image_post']); ?>" alt="Фото от пользователя" width="760" height="507">
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php if ($post['class_name'] === 'post-link') : ?>
+                    <?php if ($post['class_name'] === 'link') : ?>
                         <div class="post__main">
                             <div class="post-link__wrapper">
                                 <a class="post-link__external" href="http://<?= htmlspecialchars($post['link']); ?>" title="Перейти по ссылке">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php if ($post['class_name'] === 'post-video') : ?>
+                    <?php if ($post['class_name'] === 'video') : ?>
                         <div class="post__main">
                             <div class="post-video__block">
                                 <div class="post-video__preview">
