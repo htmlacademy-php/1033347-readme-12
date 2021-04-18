@@ -19,11 +19,17 @@ if (!$con) {
     ]);
 };
 
+//Return current tab
+
 if (isset($_POST['current-tab'])) {
     $tab_name = $_POST['current-tab'];
 } else {
     $tab_name = "quote";
 }
+
+$content = include_template('adding-post.php', [
+    'tab_name' => $tab_name,
+]);
 
 // Check FORM
 
@@ -44,7 +50,6 @@ $layout = include_template('layout.php', [
   'title' => $title,
   'is_auth' => $is_auth,
   'user_name' => $user_name,
-  'tab_name' => $tab_name,
   'content' => $content
 ]);
 

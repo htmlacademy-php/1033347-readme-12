@@ -12,7 +12,7 @@
               <a class="adding-post__tabs-link
                               filters__button
                               filters__button--<?= $val['class_name'] ?>
-                              <?= $val['class_name'] === 'quote' ? 'filters__button--active tabs__item--active' : ' '; ?>
+                              <?= $val['class_name'] === $tab_name ? 'filters__button--active tabs__item--active' : ' '; ?>
                               tabs__item
                               button" href="#">
                 <svg class="filters__icon" width="<?= $val['icon_width']; ?>" height="<?= $val['icon_height']; ?>">
@@ -27,7 +27,7 @@
         <div class="adding-post__tab-content">
           <?php foreach ($types as $key => $val) : ?>
           <section
-            class="adding-post__<?= $val['class_name']; ?> tabs__content <?= $val['class_name'] === 'quote' ? 'tabs__content--active' : ''; ?>">
+            class="adding-post__<?= $val['class_name']; ?> tabs__content <?= $val['class_name'] === $tab_name ? 'tabs__content--active' : ''; ?>">
             <h2 class="visually-hidden">Форма добавления <?= $val['title']; ?></h2>
             <form class="adding-post__form form" action="/add.php" method="POST" <?= $val['class_name'] === 'photo' ? 'enctype="multipart/form-data"' : ''; ?>>
                 <input type="text" class="visually-hidden" name="current-tab" value="<?= $val['class_name']; ?>">
